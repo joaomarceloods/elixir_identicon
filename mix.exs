@@ -1,9 +1,9 @@
-defmodule Identicons.MixProject do
+defmodule Identicon.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :identicons,
+      app: :identicon,
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
