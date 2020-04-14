@@ -2,6 +2,7 @@ defmodule Identicons do
   def main(input) do
     input
     |> hash()
+    |> pick_color()
   end
 
   defp hash(input) do
@@ -9,5 +10,10 @@ defmodule Identicons do
     |> :binary.bin_to_list()
 
     %Identicons.Image{hex: hash}
+  end
+
+  defp pick_color(image) do
+    %Identicon.Image{hex: [r, g, b | _]} = image
+    [r, g, b]
   end
 end
