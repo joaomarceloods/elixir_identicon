@@ -14,6 +14,6 @@ defmodule Identicon do
   end
 
   defp set_color(%Identicon.Image{hex: [r, g, b | _]} = image) do
-    %Identicon.Image{image, color: {r, g, b}}
+    %Identicon.Image{image | color: {r, g, b}}
   end
 end
