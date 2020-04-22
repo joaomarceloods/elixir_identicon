@@ -6,6 +6,7 @@ defmodule Identicon do
     |> set_hash()
     |> set_color()
     |> set_grid()
+    |> create_image(input)
   end
 
   defp set_hash(input) do
@@ -49,5 +50,15 @@ defmodule Identicon do
     top_left = {x, y}
     bottom_right = {x + size, y + size}
     {top_left, bottom_right}
+  end
+
+  defp create_image(%Identicon.Image{color: color, grid: grid}, filename) do
+    image = :egd.create(250, 250)
+    color = :egd.color(color)
+    Enum.map grid, fn {top_left, bottom_right} ->
+      :egd.filledRectangle(image, top_left, bottom_right, color)
+    end
+    :egd.render(image)
+    |> :egd.save("#{filename}.png")
   end
 end
