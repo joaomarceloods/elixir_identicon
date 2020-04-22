@@ -29,7 +29,8 @@ defmodule Identicon do
           |> Enum.map(&mirror_row/1)
           |> List.flatten()
           |> Enum.with_index()
-          |> Enum.filter(&is_even/1)
+          |> Enum.filter(&is_even_code/1)
+          |> Enum.map(&index_to_coordinate/1)
     }
   end
 
@@ -37,7 +38,16 @@ defmodule Identicon do
     [a, b, c, b, a]
   end
 
-  defp is_even({code, _index}) do
+  defp is_even_code({code, _index}) do
     rem(code, 2) == 0
+  end
+
+  defp index_to_coordinate({_code, index}) do
+    size = 50
+    x = rem(index, 5) * size
+    y = div(index, 5) * size
+    top_left = {x, y}
+    bottom_right = {x + size, y + size}
+    {top_left, bottom_right}
   end
 end
